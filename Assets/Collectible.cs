@@ -1,29 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class Collectible : MonoBehaviour
 {
-    private bool GOexists = true;
-    private GameObject coin;
+    [SerializeField] private Player GM;
 
-    private void Start()
-    {
-        coin = gameObject;
-    }
-
+    private int Score = 0;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            GOexists = false;
-            if (GOexists == false)
-            {
-                float Random_x = Random.Range(-3,3);
-                float Random_z = Random.Range(-3, 3);
-                Instantiate(coin, new Vector3(Random_x, 0, Random_z), Quaternion.identity);
-            }
+
+            GM.AddScore();
+            // Destroy the collectible
             Destroy(gameObject);
+            // Spawn a new collectible at a random position
+            SpawnNewCollectible();
         }
+    }
+    private void SpawnNewCollectible()
+    {
+        float Random_x = Random.Range(-5, 5);
+        float Random_z = Random.Range(-5, 5);
+        Vector3 newPosition = new Vector3(Random_x, 0, Random_z);
+        Instantiate(gameObject, newPosition, Quaternion.identity);
     }
 }
