@@ -20,15 +20,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         transform.position += speed * Time.deltaTime * moveDir;
-        if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetMouseButtonDown(0)) // left mouse button detect
         {
             transform.localScale += new Vector3(1, 1, 1);
         }
-        else if (Input.GetMouseButtonDown(1))
+        else if (Input.GetMouseButtonDown(1)) // right mouse button detect
         {
             transform.localScale -= new Vector3(1, 1, 1);
         }
-        else if (Input.GetMouseButtonDown(2))
+        else if (Input.GetMouseButtonDown(2)) // middle mouse button detect
         {
             transform.localScale = new(1, 1, 1);
         }
