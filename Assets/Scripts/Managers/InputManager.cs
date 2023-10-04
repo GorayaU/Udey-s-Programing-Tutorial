@@ -12,9 +12,20 @@ public static class InputManager
     {
         _controls = new Controls();
 
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
         _controls.Game.Movement.performed += ctx => 
         {
             myPlayer.SetMovementDirection(ctx.ReadValue<Vector3>());
+        };
+        _controls.Game.Look.performed += ctx =>
+        {
+            myPlayer.SetLookDirection(ctx.ReadValue<Vector2>());
+        };
+        _controls.Game.Shoot.performed += ctx =>
+        {
+            myPlayer.Shoot();
         };
         _controls.Permanent.Enable();
     }

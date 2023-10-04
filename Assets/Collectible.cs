@@ -12,7 +12,7 @@ public class Collectible : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Bullet"))
         {
 
             GM.AddScore();
@@ -20,6 +20,7 @@ public class Collectible : MonoBehaviour
             Destroy(gameObject);
             // Spawn a new collectible at a random position
             SpawnNewCollectible();
+            IncreaseSize(transform);
         }
     }
     private void SpawnNewCollectible()
@@ -28,5 +29,10 @@ public class Collectible : MonoBehaviour
         float Random_z = Random.Range(-5, 5);
         Vector3 newPosition = new Vector3(Random_x, 0, Random_z);
         Instantiate(gameObject, newPosition, Quaternion.identity);
+    }
+
+    private static void IncreaseSize(Component component)
+    {
+        component.transform.localScale += new Vector3(1, 1, 1);
     }
 }
