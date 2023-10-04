@@ -19,12 +19,19 @@ public class Player : MonoBehaviour
         InputManager.Init(myPlayer:this);
         InputManager.GameMode();
         txt.text = "Your Score is = 0";
+        txt.color = Color.blue;
+        txt.fontSize = 15;
     }
     public void AddScore()
     {
         Score++;
 
-        txt.text = "Your Score is = "+Score.ToString();
+        txt.text = $"Your Score is = {Score}";
+        
+        if (Score > 15)
+        {
+            txt.fontSize = Score;
+        }
     }
 
     void Update()

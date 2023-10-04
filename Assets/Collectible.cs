@@ -10,7 +10,6 @@ public class Collectible : MonoBehaviour
 {
     [SerializeField] private Player GM;
 
-    private int Score = 0;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
