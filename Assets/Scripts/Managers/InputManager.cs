@@ -27,6 +27,8 @@ public static class InputManager
         {
             myPlayer.Shoot();
         };
+        
+
         _controls.Permanent.Enable();
     }
     public static void GameMode()

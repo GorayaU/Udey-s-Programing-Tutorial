@@ -62,6 +62,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CamSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""44818004-9b53-42c7-bf5c-ccabd6c05d72"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -218,6 +227,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ceaa8f62-1257-4a89-840b-ddd3f08ae32b"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CamSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -286,6 +306,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Game_Scale = m_Game.FindAction("Scale", throwIfNotFound: true);
         m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
+        m_Game_CamSwitch = m_Game.FindAction("CamSwitch", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -357,6 +378,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Scale;
     private readonly InputAction m_Game_Shoot;
     private readonly InputAction m_Game_Look;
+    private readonly InputAction m_Game_CamSwitch;
     public struct GameActions
     {
         private @Controls m_Wrapper;
@@ -365,6 +387,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Scale => m_Wrapper.m_Game_Scale;
         public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
         public InputAction @Look => m_Wrapper.m_Game_Look;
+        public InputAction @CamSwitch => m_Wrapper.m_Game_CamSwitch;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -386,6 +409,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @CamSwitch.started += instance.OnCamSwitch;
+            @CamSwitch.performed += instance.OnCamSwitch;
+            @CamSwitch.canceled += instance.OnCamSwitch;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -402,6 +428,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @CamSwitch.started -= instance.OnCamSwitch;
+            @CamSwitch.performed -= instance.OnCamSwitch;
+            @CamSwitch.canceled -= instance.OnCamSwitch;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -517,6 +546,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnScale(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnCamSwitch(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
