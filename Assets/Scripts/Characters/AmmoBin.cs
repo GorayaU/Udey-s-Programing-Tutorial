@@ -8,7 +8,7 @@ public class AmmoBin : Collectible
     {
         bool x = col.CompareTag("Player");
         if (!x) return false;
-        GM.GainAmmo();
+        GM.GainAmmo(30);
         return true;
     }
 }
