@@ -94,4 +94,10 @@ public class Player : MonoBehaviour
             mag.RemoveBullet();
         }
     }
+    
+    public void GainAmmo(int amount)
+    {
+        mag.GrabAmmo();
+    }
+    
 }
