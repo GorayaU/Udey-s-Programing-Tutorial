@@ -136,6 +136,12 @@ PrefabInstance:
       propertyPath: GM
       value: 
       objectReference: {fileID: 815261836}
+    - target: {fileID: 767792665779199086, guid: 1e4457ba4b4994a48a0481cd930ecd77,
+        type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 3940010278202309450, guid: 1e4457ba4b4994a48a0481cd930ecd77,
+        type: 3}
     - target: {fileID: 2142032374504202782, guid: 1e4457ba4b4994a48a0481cd930ecd77,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Magtxt: {fileID: 1657307987}
+  Holding: 0
+  Inclip: 0
 --- !u!4 &279634834
 Transform:
   m_ObjectHideFlags: 0

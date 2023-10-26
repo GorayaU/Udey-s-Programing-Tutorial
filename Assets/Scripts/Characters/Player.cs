@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
     public void GainAmmo()
     {
         Debug.Log("adding");
-        mag.Holding = 120;
+        mag.Holding += 30;
         Debug.Log("added");
     }
 }
