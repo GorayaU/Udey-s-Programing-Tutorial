@@ -5,34 +5,34 @@ using UnityEngine.UI;
 
 public class MagTracker : MonoBehaviour
 {
-    [SerializeField] Text Magtxt;
+    [SerializeField] Text Magtxt; // UI for the ammo
 
-    public int Holding;
-    public int Inclip;
+    public int Holding; // Extra ammo
+    public int Inclip; // Ammo in magazine
 
     private void Start()
     {
-        Inclip = 30;
-        Holding = 120;
+        Inclip = 30; // Sets ammo in magazine to 30
+        Holding = 120; // Sets extra ammo to 120
     }
     private void Update()
     {
-        Magtxt.text = $"{Inclip}/{Holding}";
+        Magtxt.text = $"{Inclip}/{Holding}"; // Updates ammo UI
     }
 
-    public void RemoveBullet()
+    public void RemoveBullet() // Removes a bullet from magazine when called
     {
-        Inclip--;
+        Inclip--; // Lowers the bullets in the magazine by 1
     }
-    public bool CanShoot()
+    public bool CanShoot() // Checks if there is enough bullets in the magazine to shoot
     {
-        if (Inclip >= 1)
+        if (Inclip >= 1) // Checks if the magazine has 1 or more bullets
         {
-            return true;
+            return true; // Allows you to fire
         }
         else 
         {
-            return false;
+            return false; // Stops you from firing
         }
     }
 }

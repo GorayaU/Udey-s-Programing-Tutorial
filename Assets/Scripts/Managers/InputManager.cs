@@ -29,7 +29,7 @@ public static class InputManager
         };
         _controls.Game.Reload.performed += ctx =>
         {
-            myPlayer.Reload();
+            myPlayer.Reload(); // Calls the reload function when "R" is pressed
         };
         
 

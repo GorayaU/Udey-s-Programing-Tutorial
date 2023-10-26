@@ -88,35 +88,33 @@ public class Player : MonoBehaviour
     }
     internal void Shoot()
     {
-        if (mag.CanShoot())
+        if (mag.CanShoot()) // Checks if there is enough ammo to shoot in the magazine in a true or false
         {
             Rigidbody CurrentProjectile = Instantiate(BulletPrefab, transform.position, Quaternion.identity); // Spawn the object as a regidbody
             CurrentProjectile.AddForce(LookAtPoint.forward * BulletForce, ForceMode.Impulse); // Add Instant force in the look at direction of the player
             Destroy(CurrentProjectile.gameObject, 2); // Destroy after 2 seconds
-            mag.RemoveBullet();
+            mag.RemoveBullet(); // Removes a bullet from magazine
         }
     }
-    public void Reload()
+    public void Reload() // Reloads when "R" is pressed
     {
-        if (mag.Holding > 0 && mag.Inclip != 30)
+        if (mag.Holding > 0 && mag.Inclip != 30) // Checks if current magazine if full and if there is more than 0 extra bullets
         {
-            int removed = 30 - mag.Inclip;
-            if (mag.Holding >= 30)
+            int removed = 30 - mag.Inclip; // Calculates how many bullets are need to fill magazine
+            if (mag.Holding >= 30) // Checks if you have a fulls mags worth of extra ammo
             {
-                mag.Inclip = 30;
-                mag.Holding -= removed;
+                mag.Inclip = 30; // Refills magazine
+                mag.Holding -= removed; // Reduces used ammo from extra ammo
             }
-            else
+            else // If you have less then a full magazine
             {
-                mag.Inclip = mag.Holding;
-                mag.Holding = 0;
+                mag.Inclip = mag.Holding; // Fill magazine with all available ammo
+                mag.Holding = 0; // Show that there is no extra ammo
             }
         }
     }
-    public void GainAmmo()
+    public void GainAmmo() // Gets extra ammo
     {
-        Debug.Log("adding");
-        mag.Holding += 30;
-        Debug.Log("added");
+        mag.Holding += 30; // Adds 30 extra ammo
     }
 }
