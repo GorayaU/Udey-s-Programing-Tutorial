@@ -64,13 +64,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""CamSwitch"",
+                    ""name"": ""Reload"",
                     ""type"": ""Button"",
                     ""id"": ""44818004-9b53-42c7-bf5c-ccabd6c05d72"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": true
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -231,11 +231,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ceaa8f62-1257-4a89-840b-ddd3f08ae32b"",
-                    ""path"": ""<Keyboard>/y"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CamSwitch"",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -306,7 +306,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Game_Scale = m_Game.FindAction("Scale", throwIfNotFound: true);
         m_Game_Shoot = m_Game.FindAction("Shoot", throwIfNotFound: true);
         m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
-        m_Game_CamSwitch = m_Game.FindAction("CamSwitch", throwIfNotFound: true);
+        m_Game_Reload = m_Game.FindAction("Reload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
@@ -378,7 +378,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Game_Scale;
     private readonly InputAction m_Game_Shoot;
     private readonly InputAction m_Game_Look;
-    private readonly InputAction m_Game_CamSwitch;
+    private readonly InputAction m_Game_Reload;
     public struct GameActions
     {
         private @Controls m_Wrapper;
@@ -387,7 +387,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Scale => m_Wrapper.m_Game_Scale;
         public InputAction @Shoot => m_Wrapper.m_Game_Shoot;
         public InputAction @Look => m_Wrapper.m_Game_Look;
-        public InputAction @CamSwitch => m_Wrapper.m_Game_CamSwitch;
+        public InputAction @Reload => m_Wrapper.m_Game_Reload;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -409,9 +409,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
-            @CamSwitch.started += instance.OnCamSwitch;
-            @CamSwitch.performed += instance.OnCamSwitch;
-            @CamSwitch.canceled += instance.OnCamSwitch;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
         }
 
         private void UnregisterCallbacks(IGameActions instance)
@@ -428,9 +428,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
-            @CamSwitch.started -= instance.OnCamSwitch;
-            @CamSwitch.performed -= instance.OnCamSwitch;
-            @CamSwitch.canceled -= instance.OnCamSwitch;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
         }
 
         public void RemoveCallbacks(IGameActions instance)
@@ -546,7 +546,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnScale(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
-        void OnCamSwitch(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

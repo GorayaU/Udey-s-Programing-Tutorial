@@ -8,7 +8,7 @@ public static class InputManager
 {
     private static Controls _controls;
 
-    public static void Init(Player myPlayer)
+    public static void Init(Player myPlayer, MagTracker mag)
     {
         _controls = new Controls();
 
@@ -26,6 +26,10 @@ public static class InputManager
         _controls.Game.Shoot.performed += ctx =>
         {
             myPlayer.Shoot();
+        };
+        _controls.Game.Reload.performed += ctx =>
+        {
+            mag.Reload();
         };
         
 

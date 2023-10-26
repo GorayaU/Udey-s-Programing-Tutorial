@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -21,23 +22,25 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody BulletPrefab;
     [SerializeField] private float BulletForce;
 
+    [Header("Mag")]
+    [SerializeField] MagTracker mag;
+
     private Vector2 CurrentRotation;
     private int Score = 0;
     private Vector3 moveDir;
 
     void Start()
     {
-        InputManager.Init(myPlayer:this);
+        InputManager.Init(myPlayer: this, mag: mag);
         InputManager.GameMode();
 
         txt.text = "Your Score is = 0";
         txt.color = Color.blue;
-        txt.fontSize = 45;
+        txt.fontSize = 25;
     }
     void Update()
     {
         transform.position += transform.rotation * (speed * Time.deltaTime * moveDir);
-
         /*
         if (Input.GetMouseButtonDown(0)) // left mouse button detect
         {
@@ -52,6 +55,7 @@ public class Player : MonoBehaviour
             transform.localScale = new(1, 1, 1);
         }
         */
+
     }
     public void AddScore()
     {
@@ -59,7 +63,7 @@ public class Player : MonoBehaviour
 
         txt.text = $"Your Score is = {Score}";
         
-        if (Score > 45)
+        if (Score > 25)
         {
             txt.fontSize = Score;
         }
@@ -82,12 +86,12 @@ public class Player : MonoBehaviour
     }
     internal void Shoot()
     {
-        Rigidbody CurrentProjectile = Instantiate(BulletPrefab,transform.position, Quaternion.identity); // Spawn the object as a regidbody
-        CurrentProjectile.AddForce(LookAtPoint.forward * BulletForce, ForceMode.Impulse); // Add Instant force in the look at direction of the player
-        Destroy(CurrentProjectile.gameObject, 2); // Destroy after 2 seconds
-    }
-    internal void Reload()
-    {
-        BulletPrefab = null;
+        if (mag.CanShoot())
+        {
+            Rigidbody CurrentProjectile = Instantiate(BulletPrefab, transform.position, Quaternion.identity); // Spawn the object as a regidbody
+            CurrentProjectile.AddForce(LookAtPoint.forward * BulletForce, ForceMode.Impulse); // Add Instant force in the look at direction of the player
+            Destroy(CurrentProjectile.gameObject, 2); // Destroy after 2 seconds
+            mag.RemoveBullet();
+        }
     }
 }

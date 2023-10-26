@@ -42,13 +42,13 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CamSwitch",
+                    "name": "Reload",
                     "type": "Button",
                     "id": "44818004-9b53-42c7-bf5c-ccabd6c05d72",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -209,11 +209,11 @@
                 {
                     "name": "",
                     "id": "ceaa8f62-1257-4a89-840b-ddd3f08ae32b",
-                    "path": "<Keyboard>/y",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CamSwitch",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
