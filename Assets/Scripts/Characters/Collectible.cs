@@ -18,8 +18,7 @@ public abstract class Collectible : MonoBehaviour
         float Random_x = Random.Range(-5, 5);
         float Random_z = Random.Range(-5, 5);
         Vector3 newPosition = new Vector3(Random_x, 0, Random_z);
-        Transform t= Instantiate(prefab, newPosition, Quaternion.identity).transform;
-        t.localScale += Vector3.one;
+        Instantiate(prefab, newPosition, Quaternion.identity);
     }
 
     protected abstract bool CheckCollect(Collider col);

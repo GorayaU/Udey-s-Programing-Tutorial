@@ -6,9 +6,11 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
+using static Cinemachine.CinemachineOrbitalTransposer;
 
 public class Player : MonoBehaviour
 {
@@ -22,16 +24,16 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody BulletPrefab;
     [SerializeField] private float BulletForce;
 
-    [Header("Mag")]
-    [SerializeField] MagTracker mag;
-
     private Vector2 CurrentRotation;
     private int Score = 0;
     private Vector3 moveDir;
 
+    [Header("Mag")]
+    [SerializeField] MagTracker mag;
+
     void Start()
     {
-        InputManager.Init(myPlayer: this, mag: mag);
+        InputManager.Init(myPlayer: this);
         InputManager.GameMode();
 
         txt.text = "Your Score is = 0";
@@ -94,10 +96,25 @@ public class Player : MonoBehaviour
             mag.RemoveBullet();
         }
     }
-    
-    public void GainAmmo(int amount)
+    public void Reload()
     {
-        mag.GrabAmmo();
+        if (mag.Holding > 0 && mag.Inclip != 30)
+        {
+            int removed = 30 - mag.Inclip;
+            if (mag.Holding >= 30)
+            {
+                mag.Inclip = 30;
+                mag.Holding -= removed;
+            }
+            else
+            {
+                mag.Inclip = mag.Holding;
+                mag.Holding = 0;
+            }
+        }
     }
-    
+    public void GainAmmo()
+    {
+        mag.Holding += 30;
+    }
 }

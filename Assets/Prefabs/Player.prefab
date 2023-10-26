@@ -227,7 +227,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 3458550302172666345, guid: 7ecea3635c62fc84f898274cf8fb1151,
     type: 3}
   BulletForce: 20
-  mag: {fileID: 0}
+  mag: {fileID: 3004510470853635434, guid: dddfc8fc15ad18f468fbece825b8fa7f, type: 3}
 --- !u!54 &7234271898753972240
 Rigidbody:
   m_ObjectHideFlags: 0
