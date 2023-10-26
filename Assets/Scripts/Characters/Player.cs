@@ -113,11 +113,10 @@ public class Player : MonoBehaviour
             }
         }
     }
-    public void GainAmmo(int amount)
+    public void GainAmmo()
     {
-        if (mag.Holding < 90)
-        {
-            mag.Holding += amount;
-        }
+        Debug.Log("adding");
+        mag.Holding = 120;
+        Debug.Log("added");
     }
 }
